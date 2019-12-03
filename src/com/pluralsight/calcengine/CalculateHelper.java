@@ -11,16 +11,32 @@ public class CalculateHelper {
     double rightValue;
     double result;
 
-    public void process(String statement) {
+    public void process(String statement) throws InvalidStatementException  {
         //Breaks string down to individual parts
         //example input: add 1.0 2.0
         String[] parts = statement.split(" ");
+
+        //checks if input statement has 3 parts, otherwise throw exception
+        if(parts.length != 3)
+            throw new InvalidStatementException("Incorrect number of fields", statement);
+
         String commandString = parts[0]; //add
-        leftValue = Double.parseDouble(parts[1]);
-        rightValue = Double.parseDouble(parts[2]);
+
+        //check if number format of input statement is correct, else throws exception
+        try {
+            leftValue = Double.parseDouble(parts[1]);
+            rightValue = Double.parseDouble(parts[2]);
+        } catch (NumberFormatException e) {
+            throw new InvalidStatementException("Non-numeric data", statement, e);
+        }
 
         //converts commandString to corresponding enum type
         setCommandFromString(commandString);
+
+        //check to see if command is still null, means error in command string
+        if(command == null) {
+            throw new InvalidStatementException("Invalid command", statement);
+        }
 
         //calls correct derived CalculatorBase class based on enum type
         CalculateBase calculator = null;
@@ -57,6 +73,7 @@ public class CalculateHelper {
             command = MathCommand.Divide;
     }
 
+    //Override the object class' toString() method in order to print out the proper string when printing out a class instance.
     @Override
     public String toString() {
         //1.0 + 2.0 = 3.0
