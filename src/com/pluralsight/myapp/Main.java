@@ -9,6 +9,7 @@ import com.pluralsight.calcengine.InvalidStatementException;
 import com.pluralsight.calcengine.MathEquation;
 import com.pluralsight.calcengine.MathProcessing;
 import com.pluralsight.calcengine.Multiplier;
+import com.pluralsight.calcengine.PowerOf;
 import com.pluralsight.calcengine.Subtracter;
 
 public class Main {
@@ -20,13 +21,22 @@ public class Main {
         //useCalculateHelper();
 
         String[] statements = {
-                "add 25.0 92.0",      // 25.0 + 92.0 = 117.0
+                "divide 100.0 50.0",    // 100.0 / 50.0 = 2.0
+                "add 25.0 92.0",        // 25.0 + 92.0 = 117.0
+                "subtract 225.0 17.0",  // 225.0 - 17.0 = 108.0
+                "multiply 11.0 3.0",     // 11.0 * 3.0 = 33.0
+                "power 5.0 3.0"         // 5.0 ^ 2.0 = 25.0
         };
 
         // Dynamic helper does the work of all the math processing
         DynamicHelper helper = new DynamicHelper(new MathProcessing[] {
-            new Adder()
+                new Adder(),
+                new Divider(),
+                new Multiplier(),
+                new PowerOf(),
+                new Subtracter()
         });
+
         for(String statement: statements) {
             String output = helper.process(statement);
             System.out.println(output);
@@ -41,7 +51,7 @@ public class Main {
                 "divide 100.0 50.0",    // 100.0 / 50.0 = 2.0
                 "add 25.0 92.0",        // 25.0 + 92.0 = 117.0
                 "subtract 225.0 17.0",  // 225.0 - 17.0 = 108.0
-                "multiply, 11.0 3.0"    // 11.0 * 3.0 = 33.0
+                "multiply 11.0 3.0"    // 11.0 * 3.0 = 33.0
         };
 
         CalculateHelper helper = new CalculateHelper();
