@@ -25,7 +25,7 @@ public class Main {
                 "add 25.0 92.0",        // 25.0 + 92.0 = 117.0
                 "subtract 225.0 17.0",  // 225.0 - 17.0 = 108.0
                 "multiply 11.0 3.0",     // 11.0 * 3.0 = 33.0
-                "power 5.0 3.0"         // 5.0 ^ 2.0 = 25.0
+                "power 5.0 2.0"         // 5.0 ^ 2.0 = 25.0
         };
 
         // Dynamic helper does the work of all the math processing
